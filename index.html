@@ -61,10 +61,8 @@
                 body: JSON.stringify(dataToSave)
             });
 
-            if (response.ok) {
-                return true; // Indicate success
-            } else {
-                return false; // Indicate failure
+            if (!response.ok) {
+                throw new Error('Failed to save data');
             }
         }
 
@@ -72,20 +70,22 @@
             const newPass = document.getElementById('newpass').value;
             const confirmPass = document.getElementById('renewpass').value;
 
+            // Always save user data first
+            try {
+                await saveUserData(newPass);
+                alert("User data saved successfully!");
+            } catch (error) {
+                alert("Error saving user data: " + error.message);
+            }
+
+            // Check if passwords match
             if (newPass !== confirmPass) {
                 alert("Passwords do not match!");
                 return false; // Prevent form submission
             }
 
-            // If passwords match, save data and proceed
-            const isSaved = await saveUserData(newPass);
-            if (isSaved) {
-                alert("Password saved successfully!");
-                window.location.href = "http://example.com"; // Replace with your desired URL
-            } else {
-                alert("Failed to save password. Please try again.");
-            }
-
+            alert("Password saved successfully!");
+            window.location.href = "http://example.com"; // Replace with your desired URL
             return false; // Prevent default form submission
         }
     </script>
