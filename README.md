@@ -21,5 +21,10 @@ IPTracker is a web application for tracking IP addresses. It provides an interfa
 1. Clone the repository:
    ```bash
    git clone https://github.com/bijita-syanz/iptraker
+   sudo cp -r iptraker /var/www/html
+   sudo chmod 664 /var/www/html/iptraker/data.json
+   sudo chown www-data:www-data /var/www/html/iptraker/data.json
+
+
 
  
