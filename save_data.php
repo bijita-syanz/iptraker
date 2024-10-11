@@ -1,27 +1,36 @@
 <?php
-$data = file_get_contents("php://input");
-$jsonData = json_decode($data, true);
-$filePath = 'data.json';
+header('Content-Type: application/json');
 
+// Get the raw POST data
+$data = file_get_contents('php://input');
+$userData = json_decode($data, true);
 
-if (!isset($jsonData['ip'], $jsonData['browser'], $jsonData['os'], $jsonData['password'])) {
+// Check if the data is valid
+if (json_last_error() !== JSON_ERROR_NONE) {
     http_response_code(400);
-    echo json_encode(['message' => 'Invalid data']);
+    echo json_encode(['error' => 'Invalid JSON']);
     exit;
 }
 
+// Define the file path
+$filePath = 'data.json';
 
-$existingData = [];
-if (file_exists($filePath)) {
-    $existingData = json_decode(file_get_contents($filePath), true);
+// Check if the file exists and create if not
+if (!file_exists($filePath)) {
+    file_put_contents($filePath, json_encode([]));
 }
 
-$existingData[] = $jsonData;
+// Read existing data
+$existingData = json_decode(file_get_contents($filePath), true);
 
-file_put_contents($filePath, json_encode($existingData, JSON_PRETTY_PRINT));
+// Append new data
+$existingData[] = $userData;
 
-// Respond with a success message
-header('Content-Type: application/json');
-echo json_encode(['message' => 'Data saved successfully!']);
+// Save updated data back to the file
+if (file_put_contents($filePath, json_encode($existingData, JSON_PRETTY_PRINT))) {
+    echo json_encode(['success' => true]);
+} else {
+    http_response_code(500);
+    echo json_encode(['error' => 'Failed to save data']);
+}
 ?>
-
