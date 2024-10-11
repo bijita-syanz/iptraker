@@ -1,15 +1,25 @@
-# iptraker
-website for traking ip adresses
+# IPTracker
 
-# install and configure for kali linux
+IPTracker is a web application for tracking IP addresses. It provides an interface to view and manage IP data collected in a JSON format.
 
-git clone https://github.com/bijita-syanz/iptraker \n
-sudo cp iptraker var/www/html 
-sudo chmod 664 var/www/html/iptraker/data.json
-sudo chown www-data:www-data var/www/html/iptraker/data.json
+## Features
 
-# using the main.py
-show => to show the data of data.json
-rm   => to deleta the data of data.json
-exit => to exit the while loop and close the main.py script
+- Track and store IP address data
+- Simple commands to view and delete data
+- Easy installation and configuration for web servers
+
+## Installation
+
+### Prerequisites
+
+- Kali Linux
+- Python 3
+- Apache web server
+
+### Steps to Install
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/bijita-syanz/iptraker
+
  
