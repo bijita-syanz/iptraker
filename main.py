@@ -26,6 +26,8 @@ def main() :
                file.write(" ")
        else :
           pass
+    elif choise == "exit" :
+        exit()
     else:
        pass
 if __name__ == "__main__":
