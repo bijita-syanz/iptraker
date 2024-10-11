@@ -3,8 +3,8 @@ website for traking ip adresses
 
 # install and configure for kali linux
 
-git clone https://github.com/bijita-syanz/iptraker
-sudo cp iptraker var/www/html
+git clone https://github.com/bijita-syanz/iptraker \n
+sudo cp iptraker var/www/html 
 sudo chmod 664 var/www/html/iptraker/data.json
 sudo chown www-data:www-data var/www/html/iptraker/data.json
 
